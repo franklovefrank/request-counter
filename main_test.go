@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -38,7 +38,7 @@ func TestSlidingWindow(t *testing.T) {
 		}
 
 		expectedBody := fmt.Sprintf("Total requests in the last %d seconds: %d", windowSize, counter.Count)
-		actualBody, err := ioutil.ReadAll(res.Body)
+		actualBody, err := io.ReadAll(res.Body)
 		if err != nil {
 			t.Fatalf("Error reading response body: %v", err)
 		}
